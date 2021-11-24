@@ -34,16 +34,16 @@ services:
     # db mysql
     mysql:
         image: mysql:5.7.22
-        restart: unless-stopped
         environment: 
-            MYSQL_DATABASE: ${DB_DATABASE}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_DATABASE: app-6754-db
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_PASSWORD: root
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret
         volumes: 
             - ./.docker/mysql/dbdata:/var/lib/mysql
         ports: 
-            - 3388:3306
+            - "3306:3306"
         networks: 
             - teste
 
