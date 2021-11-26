@@ -48,7 +48,7 @@ Gerar as rotas da API
 php artisan route:scan
 ```
 
-Rodar os testes dos endpoints na pasta raíz da API
+Rodar os testes dos endpoints
 ```sh
 ./vendor/bin/phpunit
 ```
