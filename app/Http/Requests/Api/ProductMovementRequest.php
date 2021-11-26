@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-class AmountProductRequest extends BaseRequest
+class ProductMovementRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,8 +12,9 @@ class AmountProductRequest extends BaseRequest
     public function rules()
     {
         return [
-            'sku'    => 'required',
-            'amount' => 'required|integer'
+            'sku'     => 'required',
+            'amount'  => 'required|integer',
+            'removal' => 'required|boolean'
         ];
     }
 }
