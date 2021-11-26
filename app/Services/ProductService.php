@@ -45,23 +45,48 @@ class ProductService
     }
 
     /**
-     * Add amount product
+     * Product Movement
+     * 
+     * @param object $data
+     */
+    public function productMovement($data)
+    {
+        $data->product = $this->findWhereProduct([['sku', '=', $data->sku]]);
+        if($data->removal) {
+            $product = $this->removalAmountProduct($data);
+        } else {
+            $product = $this->addAmountProduct($data);
+        }
+        $this->createProductHistory($data);
+        return $product;
+    }
+
+    /**
+     * Add Amount Product
      * 
      * @param object $data
      */
     public function addAmountProduct($data)
     {
-        // uptate product
-        $product = $this->findWhereProduct([['sku', '=', $data->sku]]);
-        $attributes = ['amount' => ($product->amount + $data->amount)];
-        $updatedProduct = $this->updateAmountProduct($attributes, $product->id);
-        
-        // create product history
-        $product->removal = false;
-        $product->amount = $data->amount;
-        $this->createProductHistory($product);
-        
+        $attributes = ['amount' => ($data->product->amount + $data->amount)];
+        $updatedProduct = $this->updateAmountProduct($attributes, $data->product->id);
         return $updatedProduct;
+    }
+
+    /**
+     * Removal Amount Product
+     * 
+     * @param object $data
+     */
+    public function removalAmountProduct($data)
+    {
+        if($data->product->amount < $data->amount) {
+            throw new Exception("The amount to be removed is greater than the amount of the chosen product.", 400);
+        } else {
+            $attributes = ['amount' => ($data->product->amount - $data->amount)];
+            $updatedProduct = $this->updateAmountProduct($attributes, $data->product->id);
+            return $updatedProduct;
+        }
     }
 
     /**
@@ -73,7 +98,7 @@ class ProductService
     {
         $attributes = [
             'sku'          => $data->sku,
-            'removal'      => $data->removal,
+            'removal'      => (boolean) $data->removal,
             'creationDate' => date('Y/m/d H:i:s'),
             'amount'       => $data->amount,
         ];
