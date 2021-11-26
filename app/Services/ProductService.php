@@ -136,4 +136,12 @@ class ProductService
             return $product;
         }
     }
+
+    /**
+     * Get All Product History
+     */
+    public function getAllProductHistory()
+    {
+        return $this->productHistoryRepository->all();
+    }
 }
