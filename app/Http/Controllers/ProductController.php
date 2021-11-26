@@ -7,6 +7,7 @@ use App\Http\Requests\Api\CreateProductRequest;
 use App\Http\Requests\Api\ProductMovementRequest;
 
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductHistoryResource;
 
 use App\Services\ProductService;
 
@@ -51,5 +52,15 @@ class ProductController extends Controller
     {
         $data = (object) $request->all();
         return new ProductResource($this->productService->ProductMovement($data));
+    }
+
+    /**
+     * Get All Product History
+     * 
+     * @Get("productHistory")
+     */
+    public function getAllProductHistory()
+    {
+        return ProductHistoryResource::collection($this->productService->getAllProductHistory());
     }
 }
