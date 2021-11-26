@@ -1,51 +1,59 @@
+AppMax | ProductMoviment
 
-
-
-Atualizar as variáveis de ambiente do arquivo .env
-```dosini
-APP_NAME=EspecializaTi
-APP_URL=http://localhost:8989
-
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=nome_que_desejar_db
-DB_USERNAME=root
-DB_PASSWORD=root
-
-CACHE_DRIVER=redis
-QUEUE_CONNECTION=redis
-SESSION_DRIVER=redis
-
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
+- Aplicação:
+```sh
+Essa aplicação tem como objetivo envolver processos de produtos, por exemplo: cadastro, atualizações e histórico de movimentações.
+```
+- Tecnologias:
+```sh
+Php 7.4
+Laravel Framework 7.30.5
+MySQL 5.7.22
+Docker 20.10.10
+nginx
 ```
 
+- Instalação
+
+Criar uma cópia do arquivo .env.example e renomear para .env
 
 Suba os containers do projeto
 ```sh
 docker-compose up -d
 ```
 
-
 Acessar o container
 ```sh
-docker-compose exec curso_x bash
+docker-compose exec teste_appmax bash
 ```
-
 
 Instalar as dependências do projeto
 ```sh
 composer install
 ```
 
-
 Gerar a key do projeto Laravel
 ```sh
 php artisan key:generate
 ```
 
+Gerar as Tabelas e dados do banco:
+```sh
+php artisan migrate
+php artisan db:seed
+```
 
-Acessar o projeto
-[http://localhost:8989](http://localhost:8989)
+Gerar as rotas da API
+```sh
+php artisan route:scan
+```
+
+Rodar os testes dos endpoints na pasta raíz da API
+```sh
+./vendor/bin/phpunit
+```
+
+- Desenvolvedor oficial
+```sh
+Pablo Fabrício - fabriciopablo2000@gmail.com
+```
