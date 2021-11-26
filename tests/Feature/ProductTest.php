@@ -23,7 +23,6 @@ class ProductTest extends TestCase
             'amount' => 5 
         ];
         $response = $this->postJson('/product', $data);
-
         $response
             ->assertStatus(201)
             ->assertJson([
@@ -31,5 +30,22 @@ class ProductTest extends TestCase
                 'sku'    => '192sdee23',
                 'amount' => 5
             ]);
+    }
+
+    /**
+     * @test
+     * 
+     * Test product creation
+     *
+     * @return void
+     */
+    public function testProductAddition()
+    {
+        $data = [
+            'sku'    => '192sdee23',
+            'amount' => 5 
+        ];
+        $response = $this->putJson('/product', $data);
+        $response->assertStatus(200);
     }
 }
