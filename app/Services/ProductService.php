@@ -114,7 +114,7 @@ class ProductService
      */
     private function updateAmountProduct($attributes, $id)
     {
-        $update = $this->productRepository->update($attributes, $id)->first();
+        $update = $this->productRepository->update($attributes, $id)->find($id);
         if(empty($update)) {
             throw new Exception("Error updating product.", 400);
         } else {
