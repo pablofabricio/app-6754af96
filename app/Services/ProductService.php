@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use Exception;
 
 use App\Repositories\ProductRepository;
@@ -15,7 +16,7 @@ class ProductService
      * @var productRepository
      */
     private $productRepository;
-    
+
     /**
      * @name productHistoryRepository
      * @access private 
@@ -43,7 +44,7 @@ class ProductService
     {
         return $this->productRepository->create($data);
     }
-
+  
     /**
      * Product Movement
      * 
@@ -135,5 +136,4 @@ class ProductService
             return $product;
         }
     }
-
 }

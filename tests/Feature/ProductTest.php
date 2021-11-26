@@ -31,7 +31,7 @@ class ProductTest extends TestCase
                 'amount' => 5
             ]);
     }
-
+  
     /**
      * @test
      * 
